@@ -1,0 +1,31 @@
+@import '../../assets/styles/mixins.module';
+@import '../../assets/styles/variables.module';
+
+.container {
+    @include flex_box_custom(center, center, 0px);
+
+    background-image: url(../../assets/icons/images/banner.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 750px;
+}
+
+.content {
+    @include flex_box_custom(center, center, 10px);
+
+    flex-direction: column;
+}   
+
+.title {
+    font-size: 42px;
+    font-weight: 400;
+    color: $four_color;
+    margin: 16px;
+}
+
+.des {
+    color: $third_color;
+    font-weight: 400;
+    margin-bottom: 20px;
+}

@@ -1,12 +1,15 @@
-import './App.css'
+import HomePage from './components/HomePage/HomePage';
+import Info from './components/Info/Info';
+import MainLayout from './components/Layout/Layout';
 
 function App() {
-
-  return (
-    <>
-      Ecommerce
-    </>
-  )
+    return (
+        <>
+            <HomePage />
+            <Info />
+            <MainLayout></MainLayout>
+        </>
+    );
 }
 
-export default App
+export default App;
