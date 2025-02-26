@@ -33,7 +33,7 @@
 .boxIcon {
     @include radius_common(50%);
     @include flex_box_custom(center, center, 0px);
-    
+
     width: 26px;
     height: 26px;
     background-color: $primary_color;
@@ -54,10 +54,10 @@
     background-color: $primary_color;
     margin-top: 6px;
 
-    transform-origin: right ;
+    transform-origin: right;
     transform: scale(0);
     opacity: 0;
-    transition: transform 300ms, opacity 500ms;
+    transition: transform 300ms, opacity 300ms;
 }
 
 .menu:hover::after {
