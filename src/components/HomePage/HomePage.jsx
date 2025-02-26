@@ -7,13 +7,20 @@ import PopularProduct from '../PopularProduct/PopularProduct';
 import Info from '../Info/Info';
 import styles from './styles.module.scss';
 import { getProducts } from '../../apis/productsService';
+import SaleHomepage from '../SaleHomepage/SaleHomepage';
 
 function HomePage() {
     const { container } = styles;
-    const [listProducts, setListProducts]= useState([]);
+    const [listProducts, setListProducts] = useState([]);
 
     useEffect(() => {
-        getProducts().then((res) => {
+        const query = {
+            sortType: 0,
+            page: 1,
+            limit: 10,
+        };
+
+        getProducts(query).then((res) => {
             setListProducts(res.contents);
         });
     }, []);
@@ -24,8 +31,9 @@ function HomePage() {
             <Banner />
             <Info />
             <AdvanceHeading />
-            <HeadingListProducts data={listProducts.slice(0, 2)}/>
-            <PopularProduct data={listProducts.slice(2, 10)}/>
+            <HeadingListProducts data={listProducts.slice(0, 2)} />
+            <PopularProduct data={listProducts.slice(2, 10)} />
+            <SaleHomepage />
             <div style={{ height: '200px' }}></div>
         </>
     );
