@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import AdvanceHeading from '../AdvanceHeading/AdvanceHeading';
 import Banner from '../Banner/Banner';
 import MyHeader from '../Header/Header';
+import Footer from '../Footer/Footer';
 import HeadingListProducts from '../HeadingListProduct/HeadingListProducts';
 import PopularProduct from '../PopularProduct/PopularProduct';
 import Info from '../Info/Info';
@@ -34,7 +35,7 @@ function HomePage() {
             <HeadingListProducts data={listProducts.slice(0, 2)} />
             <PopularProduct data={listProducts.slice(2, 10)} />
             <SaleHomepage />
-            <div style={{ height: '200px' }}></div>
+            <Footer />
         </>
     );
 }

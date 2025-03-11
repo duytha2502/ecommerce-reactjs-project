@@ -1,12 +1,11 @@
 import styles from './styles.module.scss';
 import Button from '../Button/Button';
-import { useEffect } from 'react';
-import useTranslateX from './translateX';
+import useTranslateXImage from '../../hooks/useTranslateXImage';
 
 function SaleHomepage() {
     const { container, imgBox, title, des, boxBtn } = styles;
 
-    const translateXPosition = useTranslateX();
+    const { translateXPosition } = useTranslateXImage();
 
     return (
         <div className={container}>
@@ -18,7 +17,7 @@ function SaleHomepage() {
                 }}
             >
                 <img
-                    src='https://scontent.fsgn2-5.fna.fbcdn.net/v/t39.30808-6/480583147_1198380205627147_4001598480030301827_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=127cfc&_nc_ohc=GTDtyg6FcB0Q7kNvgEmnDAn&_nc_oc=AdiFBWcOILjRzd8oAyk7h1XhNLbFR2sk4NyakyReEQzqcmXCH0qq9OXuoywJ-s5x-WU&_nc_zt=23&_nc_ht=scontent.fsgn2-5.fna&_nc_gid=A9qbiuX1uqYvF7JUwbGlsda&oh=00_AYBSqyZFM9VjmnVeKHWeWneHjNVvFcKJtCr1RSNYir6vHw&oe=67C50868'
+                    src='https://xstore.8theme.com/elementor2/marseille04/wp-content/uploads/sites/2/2022/12/Image_1.jpeg'
                     alt=''
                 />
             </div>
@@ -42,7 +41,7 @@ function SaleHomepage() {
                 }}
             >
                 <img
-                    src='https://scontent.fsgn2-5.fna.fbcdn.net/v/t39.30808-6/480583147_1198380205627147_4001598480030301827_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=127cfc&_nc_ohc=GTDtyg6FcB0Q7kNvgEmnDAn&_nc_oc=AdiFBWcOILjRzd8oAyk7h1XhNLbFR2sk4NyakyReEQzqcmXCH0qq9OXuoywJ-s5x-WU&_nc_zt=23&_nc_ht=scontent.fsgn2-5.fna&_nc_gid=A9qbiuX1uqYvF7JUwbGlsda&oh=00_AYBSqyZFM9VjmnVeKHWeWneHjNVvFcKJtCr1RSNYir6vHw&oe=67C50868'
+                    src='https://xstore.8theme.com/elementor2/marseille04/wp-content/uploads/sites/2/2022/12/Image_2.jpeg'
                     alt=''
                 />
             </div>
