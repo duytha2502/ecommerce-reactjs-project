@@ -1,0 +1,19 @@
+@import '../../../assets/styles/mixins.module';
+
+.container {
+    @include flex_box_custom(space-between, unset, 0px);
+
+    padding: 20px 20px 0px 30px;
+    height: 90vh;
+    flex-direction: column;
+
+    .total {
+        @include flex_box_custom(space-between, center, 0px);  
+    }
+
+}
+
+.boxBtn {
+    @include flex_box_custom(center, center, 0px);  
+    flex-direction: column;
+}

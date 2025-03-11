@@ -59,10 +59,19 @@
 }
 
 .menu {
+    position: relative;
     cursor: pointer;
     padding-top: 6px;
     font-size: 16px;
     color: $primary_color;
+
+    .subMenu {
+        position: absolute;
+        background-color: #fff;
+        width: 100%;
+        padding: 10px;
+        top: 40px;
+    }
 }
 
 .menu::after {

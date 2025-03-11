@@ -2,7 +2,7 @@
 @import '../../assets/styles/variables.module';
 
 .btn {
-    @include btn(176px, 42px, $primary_color, 3px);
+    @include btn(200px, 42px, $primary_color, 3px);
 
     cursor: pointer;
     font-size: 14px;

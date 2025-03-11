@@ -19,8 +19,8 @@ function MyFooter() {
                 <img src='https://xstore.b-cdn.net/elementor2/marseille04/wp-content/uploads/sites/2/2022/12/marseille-logo.png' alt='' width={160} height={56} />
             </div>
             <div className={boxNav}>
-                {dataMenu.map((item) => {
-                    return <div>{item.content}</div>;
+                {dataMenu.map((item, index) => {
+                    return <div key={index}>{item.content}</div>;
                 })}
             </div>
             <div>
