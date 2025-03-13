@@ -7,7 +7,7 @@ import { SideBarContext } from '../../contexts/SideBarProvider.jsx';
 import useScrollHandling from '../../hooks/useScrollHandling.js';
 import { TfiReload } from 'react-icons/tfi';
 import { BsHeart } from 'react-icons/bs';
-import { PiShoppingCart} from 'react-icons/pi';
+import { PiShoppingCart } from 'react-icons/pi';
 import className from 'classnames';
 
 function MyHeader() {
@@ -19,16 +19,18 @@ function MyHeader() {
         containerMenu,
         fixedHeader,
         topHeader,
+        boxCart,
+        quantity
     } = styles;
 
     const { scrollPosition } = useScrollHandling();
     const [fixedPosition, setFixedPosition] = useState(false);
-    const { setIsOpen, setType } = useContext(SideBarContext);
+    const { setIsOpen, setType, listProductCart, handleGetListProductsCart } = useContext(SideBarContext);
 
     const handleOpenSideBar = (type) => {
         setIsOpen(true);
         setType(type);
-    }
+    };
 
     useEffect(() => {
         setFixedPosition(scrollPosition > 80 ? true : false);
@@ -60,14 +62,22 @@ function MyHeader() {
                     <div className={containerBoxIcon}>
                         {dataBoxIcon.map((item, index) => {
                             return (
-                                <BoxIcon key={index} type={item.type} href={item.href} />
+                                <BoxIcon
+                                    key={index}
+                                    type={item.type}
+                                    href={item.href}
+                                />
                             );
                         })}
                     </div>
                     <div className={containerMenu}>
                         {dataMenu.slice(0, 3).map((item, index) => {
                             return (
-                                <Menu key={index} content={item.content} href={item.href} />
+                                <Menu
+                                    key={index}
+                                    content={item.content}
+                                    href={item.href}
+                                />
                             );
                         })}
                     </div>
@@ -81,21 +91,37 @@ function MyHeader() {
                 </div>
                 <div className={containerBox}>
                     <div className={containerMenu}>
-                        {dataMenu.slice(3, dataMenu.length).map((item, index) => {
-                            return (
-                                <Menu
-                                    key={index}
-                                    content={item.content}
-                                    href={item.href}
-                                    setIsOpen={setIsOpen}
-                                />
-                            );
-                        })}
+                        {dataMenu
+                            .slice(3, dataMenu.length)
+                            .map((item, index) => {
+                                return (
+                                    <Menu
+                                        key={index}
+                                        content={item.content}
+                                        href={item.href}
+                                        setIsOpen={setIsOpen}
+                                    />
+                                );
+                            })}
                     </div>
                     <div className={containerBoxIcon}>
-                        <TfiReload style={{ fontSize: '20px' }} onClick={() => handleOpenSideBar('compare')}/>
-                        <BsHeart style={{ fontSize: '20px' }} onClick={() => handleOpenSideBar('wishlist')}/>
-                        <PiShoppingCart style={{ fontSize: '26px' }} onClick={() => handleOpenSideBar('cart')}/>
+                        <TfiReload
+                            style={{ fontSize: '20px' }}
+                            onClick={() => handleOpenSideBar('compare')}
+                        />
+                        <BsHeart
+                            style={{ fontSize: '20px' }}
+                            onClick={() => handleOpenSideBar('wishlist')}
+                        />
+                        <div className={boxCart}>
+                            <PiShoppingCart
+                                style={{ fontSize: '26px' }}
+                                onClick={() => handleOpenSideBar('cart')}
+                            />
+                            <div className={quantity}>
+                                {listProductCart.length}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

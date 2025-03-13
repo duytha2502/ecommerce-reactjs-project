@@ -9,6 +9,14 @@ const routers = [
         path: '/shop',
         component: lazy(() => import('../pages/OurShop/OurShop')),
     },
+    {
+        path: '/cart',
+        component: lazy(() => import('../pages/Cart/Cart')),
+    },
+    {
+        path: '/product/:id',
+        component: lazy(() => import('../pages/DetailProduct/Index')),
+    },
 ];
 
 export default routers;

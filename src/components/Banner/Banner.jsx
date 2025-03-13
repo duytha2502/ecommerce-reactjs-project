@@ -8,7 +8,9 @@ function Banner() {
             <div className={content}>
                 <h1 className={title}>Duy Thai Store</h1>
                 <div className={des}>25/02/2002</div>
-                <Button content={'Go to shop'} />
+                <div style={{ width: '172px' }}>
+                    <Button content={'Go to shop'} />
+                </div>
             </div>
         </div>
     );

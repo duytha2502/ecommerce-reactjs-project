@@ -54,7 +54,6 @@
 
         .boxBtn {
             width: 160px;
-
         }
     }
 }
@@ -89,8 +88,12 @@
 }
 
 .containerProduct {
-    @include flex_box_custom(center, center, 10px);
+    @include flex_box_custom(space-between, flex-start, 10px);
 
     flex-wrap: wrap;
     margin-top: 10px;
+}
+
+.sectionListProduct {
+    min-height: 800px;
 }

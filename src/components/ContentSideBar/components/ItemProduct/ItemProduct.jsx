@@ -1,23 +1,67 @@
+import { useContext, useState } from 'react';
+import { deleteItem } from '../../../../apis/cartService';
 import styles from './styles.module.scss';
 import { IoCloseOutline } from 'react-icons/io5';
+import { SideBarContext } from '../../../../contexts/SideBarProvider';
+import LoadingTextCommon from '../../../LoadingTextCommon/LoadingTextCommon';
 
-function ItemProduct() {
-    const { container, boxContent, title, price, boxClose, size } = styles;
+function ItemProduct({
+    src,
+    nameProduct,
+    skuProduct,
+    sizeProduct,
+    priceProduct,
+    quantity,
+    productId,
+    userId,
+}) {
+    const {
+        container,
+        boxContent,
+        title,
+        price,
+        boxClose,
+        size,
+        overlayLoading,
+    } = styles;
+    const [isDelete, setIsDelete] = useState(false);
+    const { handleGetListProductsCart } = useContext(SideBarContext);
+
+    const handleRemoveItem = () => {
+        setIsDelete(true);
+        deleteItem({
+            productId,
+            userId,
+        })
+            .then((res) => {
+                setIsDelete(false);
+                handleGetListProductsCart(userId, 'cart');
+            })
+            .catch((err) => {
+                setIsDelete(false);
+            });
+    };
+
     return (
         <div className={container}>
-            <img
-                src='https://scontent.fsgn2-5.fna.fbcdn.net/v/t39.30808-6/483666904_1201722437979531_2875451849210590872_n.jpg?stp=dst-jpg_p180x540_tt6&_nc_cat=1&ccb=1-7&_nc_sid=127cfc&_nc_ohc=q4j77zKRve0Q7kNvgFiULrH&_nc_oc=AdhN8n3L5yWbyjqu8nXhgX9U6lxVmHnb45Y2IpON8aq9vQAFU_FBspFp_P1SuPMmucQ&_nc_zt=23&_nc_ht=scontent.fsgn2-5.fna&_nc_gid=Aj8US0PQUmnitgNvGk3sk02&oh=00_AYH0Q4uR6PoYl0NNGSbis8Z0gWz1hObnprgEtD5Yv2tHOQ&oe=67D5061F'
-                alt=''
-            />
-            <div className={boxClose}>
+            <img src={src} alt='' />
+            <div className={boxClose} onClick={handleRemoveItem}>
                 <IoCloseOutline style={{ fontSize: '22px', color: 'c1c1c1' }} />
             </div>
             <div className={boxContent}>
-                <div className={title}>Title</div>
-                <div className={size}>Size:M</div>
-                <div className={price}>$119.99</div>
-                <div className={price}>SKU: 2522002</div>
+                <div className={title}>{nameProduct}</div>
+                <div className={size}>Size: {sizeProduct}</div>
+                <div className={price}>
+                    {quantity} x ${priceProduct}
+                </div>
+                <div className={price}>SKU: {skuProduct}</div>
             </div>
+
+            {isDelete && (
+                <div className={overlayLoading}>
+                    <LoadingTextCommon />
+                </div>
+            )}
         </div>
     );
 }

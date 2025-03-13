@@ -1,0 +1,6 @@
+@import '../../assets/styles/mixins.module';
+
+.boxSlider {
+    @include flex_box_custom(center, center,0px);
+
+}

@@ -1,4 +1,5 @@
 import MyHeader from '../../components/Header/Header';
+import MyFooter from '../../components/Footer/Footer';
 import MainLayout from '../../components/Layout/Layout';
 import Banner from './components/Banner';
 import styles from './styles.module.scss';
@@ -37,6 +38,7 @@ function OurShop() {
                     <ListProducts />
                 </div>
             </MainLayout>
+            <MyFooter />
         </OurShopProvider>
     );
 }

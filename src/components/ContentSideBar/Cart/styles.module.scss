@@ -1,19 +1,66 @@
 @import '../../../assets/styles/mixins.module';
+@import '../../../assets/styles/variables.module';
 
 .container {
     @include flex_box_custom(space-between, unset, 0px);
 
     padding: 20px 20px 0px 30px;
-    height: 90vh;
+    height: 96vh;
     flex-direction: column;
 
     .total {
-        @include flex_box_custom(space-between, center, 0px);  
+        @include flex_box_custom(space-between, center, 0px);
+
+        font-size: 14px;
+        color: $four_color;
+        font-weight: 300;
+
+        .price {
+            font-size: 16px;
+            font-weight: 400;
+        }
     }
 
+    .boxBtn {
+        @include flex_box_custom(center, center, 6px);
+        flex-direction: column;
+    }
+
+    .containerListProductCart {
+        position: relative;
+
+        .overlayLoading {
+            @include flex_box_custom(center, center, 0px);
+
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+    }
+
+    .boxEmpty {
+        text-align: center;
+        font-size: 14px;
+        color: $four_color;
+        margin-top: 30px;
+
+        .boxBtnEmpty {
+            width: 162px;
+            margin: 20px auto;
+        }
+    }
+
+    .containerListItem {
+        @include flex_box_custom(space-between, unset, 0px);
+        flex-direction: column;
+
+        flex-grow: 1;
+    }
 }
 
-.boxBtn {
-    @include flex_box_custom(center, center, 0px);  
-    flex-direction: column;
+.isEmpty {
+    justify-content: unset;
 }
