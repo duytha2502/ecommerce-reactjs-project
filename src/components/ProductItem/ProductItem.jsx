@@ -12,6 +12,7 @@ import { CiHeart } from 'react-icons/ci';
 import { LiaEyeSolid, LiaShoppingBagSolid } from 'react-icons/lia';
 import { TfiReload } from 'react-icons/tfi';
 import { useNavigate } from 'react-router-dom';
+import { handleAddProductToCartCommon } from '../../utils/helper';
 
 function ProductItem({
     src,
@@ -20,6 +21,7 @@ function ProductItem({
     price,
     details,
     isHomePage = true,
+    slideItem = false,
 }) {
     const {
         boxImg,
@@ -59,39 +61,17 @@ function ProductItem({
     };
 
     const handleAddToCart = () => {
-        if (!userId) {
-            setIsOpen(true);
-            setType('login');
-            toast.warning('Please login to add product to cart!');
-
-            return;
-        }
-
-        if (!sizeChoose) {
-            toast.warning('Please choose size!');
-            return;
-        }
-
-        const data = {
+        handleAddProductToCartCommon(
             userId,
-            productId: details._id,
-            quantity: 1,
-            size: sizeChoose,
-        };
-
-        setIsLoading(true);
-        addProductToCart(data)
-            .then((res) => {
-                setIsOpen(true);
-                setType('cart');
-                setIsLoading(false);
-                handleGetListProductsCart(userId, 'cart');
-                toast.success('Product added to cart successfully!');
-            })
-            .catch((err) => {
-                setIsLoading(false);
-                toast.error('Failed to add product to cart!');
-            });
+            setIsOpen,
+            setType,
+            toast,
+            sizeChoose,
+            details._id,
+            1,
+            setIsLoading,
+            handleGetListProductsCart
+        );
     };
 
     const handleShowDetailProductSideBar = () => {
@@ -104,7 +84,7 @@ function ProductItem({
         const path = `/product/${details._id}`;
 
         navigate(path);
-    }
+    };
 
     useEffect(() => {
         if (isHomePage) {
@@ -114,13 +94,19 @@ function ProductItem({
         }
     }, [isHomePage, ourShopStore?.isShowGrid]);
 
+    useEffect(() => {
+        if (slideItem) setIsShowGrid(true);
+    }, [slideItem]);
+
     return (
         <div
             className={isShowGrid ? '' : containerItem}
             style={{ cursor: 'pointer' }}
-            onClick={handleNavigateToDetail}
         >
-            <div className={cls(boxImg, { [largeImg]: !isShowGrid })}>
+            <div
+                className={cls(boxImg, { [largeImg]: !isShowGrid })}
+                onClick={handleNavigateToDetail}
+            >
                 <img src={src} alt='' />
                 <img className={showImgWhenHover} src={prevSrc} alt='' />
                 <div className={showFncWhenHover}>
@@ -141,7 +127,10 @@ function ProductItem({
                     </div>
                 </div>
             </div>
-            <div className={isShowGrid ? '' : content}>
+            <div
+                className={isShowGrid ? '' : content}
+                style={{ marginTop: slideItem && '10px' }}
+            >
                 {!isHomePage && (
                     <div className={boxSize}>
                         {details.size.map((item, index) => {

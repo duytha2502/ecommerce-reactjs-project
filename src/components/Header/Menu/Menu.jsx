@@ -18,7 +18,7 @@ function Menu({ content }) {
         }
 
         if (content === 'Our Shop') {
-            navigate('shop');
+            navigate('/shop');
         }
     };
 

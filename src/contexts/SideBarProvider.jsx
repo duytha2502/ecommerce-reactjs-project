@@ -34,17 +34,13 @@ export const SideBarProvider = ({ children }) => {
         setType,
         handleGetListProductsCart,
         listProductCart,
-        setListProductCart,
         isLoading,
         setIsLoading,
         userId,
         detailProduct,
-        setDetailProduct
+        setDetailProduct,
+        setListProductCart,
     };
-
-    useEffect(() => {
-        handleGetListProductsCart(Cookies.get('userId'), 'cart');
-    }, []);
 
     return (
         <SideBarContext.Provider value={value}>

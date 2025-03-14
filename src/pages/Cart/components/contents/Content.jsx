@@ -2,12 +2,13 @@ import styles from '../../styles.module.scss';
 import CartSummary from './CartSummary';
 import CartTable from './CartTable';
 import Button from '../../../../components/Button/Button';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { SideBarContext } from '../../../../contexts/SideBarProvider';
 import {
     addProductToCart,
     deleteCart,
     deleteItem,
+    getCart,
 } from '../../../../apis/cartService';
 import { PiShoppingCartLight } from 'react-icons/pi';
 import { useNavigate } from 'react-router-dom';
@@ -28,6 +29,7 @@ function Content() {
         isLoading,
         setIsLoading,
         userId,
+        setListProductCart,
     } = useContext(SideBarContext);
     const navigate = useNavigate();
 
@@ -67,6 +69,20 @@ function Content() {
     const handleNavigateToShop = () => {
         navigate('/shop');
     };
+
+    useEffect(() => {
+        if (userId) {
+            getCart(userId)
+                .then((res) => {
+                    setListProductCart(res.data.data);
+                    setIsLoading(false);
+                })
+                .catch((err) => {
+                    setListProductCart([]);
+                    setIsLoading(false);
+                });
+        }
+    }, []);
 
     return (
         <>

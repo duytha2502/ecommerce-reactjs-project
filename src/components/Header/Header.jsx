@@ -9,6 +9,7 @@ import { TfiReload } from 'react-icons/tfi';
 import { BsHeart } from 'react-icons/bs';
 import { PiShoppingCart } from 'react-icons/pi';
 import className from 'classnames';
+import { StoreProvider } from '../../contexts/StoreProvider.jsx';
 
 function MyHeader() {
     const {
@@ -20,21 +21,8 @@ function MyHeader() {
         fixedHeader,
         topHeader,
         boxCart,
-        quantity
+        quantity,
     } = styles;
-
-    const { scrollPosition } = useScrollHandling();
-    const [fixedPosition, setFixedPosition] = useState(false);
-    const { setIsOpen, setType, listProductCart, handleGetListProductsCart } = useContext(SideBarContext);
-
-    const handleOpenSideBar = (type) => {
-        setIsOpen(true);
-        setType(type);
-    };
-
-    useEffect(() => {
-        setFixedPosition(scrollPosition > 80 ? true : false);
-    }, [scrollPosition]);
 
     const dataBoxIcon = [
         { type: 'fb', href: '#' },
@@ -50,6 +38,38 @@ function MyHeader() {
         { content: 'Search', href: '#' },
         { content: 'Sign in', href: '#' },
     ];
+
+    const { scrollPosition } = useScrollHandling();
+    const [fixedPosition, setFixedPosition] = useState(false);
+    const {
+        setIsOpen,
+        setType,
+        listProductCart,
+        userId,
+        handleGetListProductsCart,
+    } = useContext(SideBarContext);
+    // const { userInfo } = useContext(StoreProvider);
+    // console.log(userInfo);
+
+    const handleOpenSideBar = (type) => {
+        setIsOpen(true);
+        setType(type);
+    };
+
+    const handleOpenCartSideBar = () => {
+        handleGetListProductsCart(userId, 'cart');
+        handleOpenSideBar('cart');
+    };
+
+    const totalItemCart = listProductCart.length
+        ? listProductCart.reduce((acc, item) => {
+              return (acc += item.quantity);
+          }, 0)
+        : 0;
+
+    useEffect(() => {
+        setFixedPosition(scrollPosition > 80 ? true : false);
+    }, [scrollPosition]);
 
     return (
         <div
@@ -116,10 +136,10 @@ function MyHeader() {
                         <div className={boxCart}>
                             <PiShoppingCart
                                 style={{ fontSize: '26px' }}
-                                onClick={() => handleOpenSideBar('cart')}
+                                onClick={() => handleOpenCartSideBar()}
                             />
                             <div className={quantity}>
-                                {listProductCart.length}
+                                {/* {totalItemCart || userInfo?.amountCart || 0} */}
                             </div>
                         </div>
                     </div>
